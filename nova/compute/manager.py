@@ -102,6 +102,7 @@ from nova.virt import hardware
 from nova.virt import storage_users
 from nova.virt import virtapi
 from nova.volume import cinder
+from nova.common import utils as log_utils
 
 CONF = nova.conf.CONF
 
@@ -1596,6 +1597,8 @@ class ComputeManager(manager.Manager):
         return _sync_refresh()
 
     def _await_block_device_map_created(self, context, vol_id):
+        LOG.info('%s(): caller(): %s', log_utils.get_fname(1), log_utils.get_fname(2))
+
         # TODO(yamahata): creating volume simultaneously
         #                 reduces creation time?
         # TODO(yamahata): eliminate dumb polling
